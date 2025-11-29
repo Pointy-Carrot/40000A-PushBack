@@ -3,23 +3,25 @@
 #include "pros/motors.hpp"
 #include "pros/adi.hpp"
 #include "lemlib/pid.hpp"
+#include "subsystems/pneumatics.h"
 
-enum CataState {UP, MIDGOAL, DOWN, HALF};
+enum CataState {LONGGOAL, MIDGOAL, DOWN, HALF};
 
 class CataSubsystem {
     private:
         
         lemlib::PID cata_pid;
         float down_position;
-        float up_position;
+        float long_goal_position;
         float midgoal_position;
         float half_position;
     public:
 
         pros::Motor* cata;
         pros::adi::Potentiometer* cata_pot;
-        pros::adi::Pneumatics* gate;
-        pros::adi::Pneumatics* midgoal_switch;
+        PneumaticsSubsystem* gate;
+        PneumaticsSubsystem* midgoal_switch;
+
 
         /**
          * @brief Cata Constructor
@@ -27,7 +29,7 @@ class CataSubsystem {
          * @param cata cata motor
          * @param cata_pot cata potentiometer
          */
-        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, pros::adi::Pneumatics* gate, pros::adi::Pneumatics* midgoal_switch, float kP, float kI, float kD);
+        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch, float kP, float kI, float kD);
 
         /**
          * @brief Set the Down Position of the cata
@@ -41,7 +43,7 @@ class CataSubsystem {
          * 
          * @param position up position
          */
-        void setUpPosition(float position);
+        void setLongGoalPosition(float position);
 
         /**
          * @brief Set the Midgoal Position of the cata
@@ -145,7 +147,7 @@ class CataSubsystem {
          * 
          * @return float 
          */
-        float get_up_position();
+        float get_long_goal_position();
 
         /**
          * @brief Get the down position

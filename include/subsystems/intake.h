@@ -14,6 +14,7 @@ class IntakeSubsystem {
         pros::Motor* sorter;
         pros::Optical* sort_sensor;
         pros::adi::Potentiometer* alliance_pot;
+        int alliance_color;
         int volts;
 
         /**
@@ -73,9 +74,40 @@ class IntakeSubsystem {
         /**
          * @brief Get the alliance color
          * 
-         * @return int (1->RED / 2-> BLUE)
+         * @return int (1->RED / 2->BLUE)
          */
         int get_alliance_color();
+
+        /**
+         * @brief turn on color sort
+         * 
+         */
+        void sort_on();
+
+        /**
+         * @brief turn off color sort
+         * 
+         */
+        void sort_off();
+
+        /**
+         * @brief Set the alliance color to red
+         * 
+         */
+        void set_alliance_red();
+
+        /**
+         * @brief Set the alliance color to blue
+         * 
+         */
+        void set_alliance_blue();
+
+        /**
+         * @brief Get the alliance potentiometer selection
+         * 
+         * @return int (1->RED / 2->BLUE)
+         */
+        int get_alliance_pot_selection();
 };
 
 extern IntakeSubsystem intake;

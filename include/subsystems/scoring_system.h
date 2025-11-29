@@ -2,7 +2,7 @@
 #include "subsystems/intake.h"
 
 extern bool midgoal;
-extern bool driver_controlled_cata;
+extern bool manual_cata_control;
 extern bool slow_cata;
 extern bool colorsort_on;
 
@@ -29,5 +29,25 @@ void scoring_system_controller();
  * 
  */
 void set_alliance();
+
+/**
+ * @brief driver intake control
+ * 
+ */
+void driver_intake();
+
+/**
+ * @brief driver cata control
+ * 
+ */
+void driver_cata();
+
+/**
+ * @brief driver wing control
+ * 
+ */
+void driver_wing();
+
+
 
 extern Color alliance_color;

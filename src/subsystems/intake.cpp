@@ -3,6 +3,7 @@
 #include "initialization/sensor_initialization.h"
 #include "pros/adi.hpp"
 #include "pros/optical.hpp"
+#include "subsystems/scoring_system.h"
 
 
 
@@ -11,11 +12,11 @@ IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Motor* sorter, pros:
 
 void IntakeSubsystem::move(int voltage){
     volts = voltage;
-    if(volts > 0){
+    if(volts > 0){ // if voltage positive, intake
         intake_state = INTAKE;
-    } else if(volts < 0){
+    } else if(volts < 0){ // if voltage negative, outtake
         intake_state = OUTTAKE;
-    } else if(volts == 0){
+    } else if(volts == 0){ // if voltage equals zero, stop
         intake_state = STOP;
     }
 }
@@ -69,10 +70,12 @@ void IntakeSubsystem::sort(int alliance_color){
     while(sort_sensor->get_proximity()<100){
         pros::delay(10);
     }
+    // optical sensors detect red better than blue, so we check for red detected and not
+    // red detected instead of red detected and blue detected
     if(alliance_color == 1){
         // sort out blue
         // wait until color detected
-        if(!(sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){
+        if(!(sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){ // if not red detected
             store_current_intake_state();
             intake_state = SORT;
             // wait a bit
@@ -83,7 +86,7 @@ void IntakeSubsystem::sort(int alliance_color){
     } else if(alliance_color == 2){
         // sort out red
         // wait until color detected
-        if((sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){
+        if((sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){ // if red detected
             store_current_intake_state();
             intake_state = SORT;
             // wait a bit
@@ -94,13 +97,34 @@ void IntakeSubsystem::sort(int alliance_color){
     }
 }
 
-int IntakeSubsystem::get_alliance_color(){
+int IntakeSubsystem::get_alliance_pot_selection(){
     if(alliance_pot->get_value()>2000){
         return 1; // RED
     } else{
         return 2; // BLUE
     }
 }
+
+void IntakeSubsystem::sort_on(){
+    colorsort_on = true;
+}
+
+void IntakeSubsystem::sort_off(){
+    colorsort_on = false;
+}
+
+void IntakeSubsystem::set_alliance_red(){
+    alliance_color = 1;
+}
+
+void IntakeSubsystem::set_alliance_blue(){
+    alliance_color = 2;
+}
+
+int IntakeSubsystem::get_alliance_color(){
+    return alliance_color;
+}
+
 
 
 
