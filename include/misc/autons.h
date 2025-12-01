@@ -9,3 +9,5 @@ void left_7_ball_split();
 void right_7_ball_split();
 void full_sawp();
 void prog_skills();
+
+void ramsete_test();

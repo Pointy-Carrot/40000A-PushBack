@@ -186,14 +186,7 @@ void prog_skills(){
     chassis.moveToPoint(-56, -8, 1500);
 }
 
-void ramsete_prog(){
-    Trajectory myPath;
-    myPath.points = {
-        {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-        {0.5, 3.0, 0.0, 0.0, 6.0, 0.0},
-        {1.0, 12.0, 0.0, 0.0, 18.0, 0.0},
-        {1.5, 21.0, 0.0, 0.0, 6.0, 0.0},
-        {2.0, 24.0, 0.0, 0.0, 0.0, 0.0}
-    };
-    ramchassis.follow(myPath);
+void ramsete_test(){
+    ramchassis.follow(path_one);
+    ramchassis.follow(path_two);
 }

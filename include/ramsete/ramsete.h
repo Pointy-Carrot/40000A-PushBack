@@ -1,6 +1,7 @@
 #pragma once
 #include "lemlib/chassis/chassis.hpp"
 #include "ramsete/trajectory.h"
+#include "trajectory.h"
 
 
 
@@ -55,7 +56,7 @@ class Ramsete {
          * 
          * @param path the Trajectory to follow
          */
-        void follow(Trajectory& path);
+        void follow(const Trajectory& path);
 
         /**
          * @brief transforms linear and angular speeds into left and right wheel speeds

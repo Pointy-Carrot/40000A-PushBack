@@ -73,7 +73,7 @@ double Ramsete::diameter_to_circumference(double diameter){
 }
 
 
-void Ramsete::follow(Trajectory& path){
+void Ramsete::follow(const Trajectory& path){
     double start_time = pros::millis() / 1000.0;
     double path_time = 0.0;
     Pose2d current_pose;

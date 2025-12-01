@@ -1,4 +1,6 @@
 #include "ramsete/trajectory.h"
+#include <sstream>
+#include "ramsete/static_paths.h"
 
 
 
@@ -8,8 +10,6 @@ double sanitize_angle(double angle){
     if(angle < -M_PI) angle += 2.0 * M_PI;
     return angle;
 }
- 
-
 
 
 
@@ -28,6 +28,7 @@ TrajectoryPoint Trajectory::sample(double time) const {
     if(time >= points.back().time){
         return points.back();
     }
+
     for(size_t i = 0; i < points.size() - 1; ++i){
         const TrajectoryPoint& start_point = points[i];
         const TrajectoryPoint& end_point = points[i+1];
@@ -61,3 +62,43 @@ double Trajectory::getTotalTime() const {
     return points.empty() ? 0.0 : points.back().time;
 }
 
+Trajectory load_trajectory_from_asset(const char* path_data){
+    Trajectory trajectory;
+
+    std::stringstream ss(path_data);
+
+    std::string line;
+
+    while(std::getline(ss, line)){
+        if(line.empty()) continue;
+
+        TrajectoryPoint point;
+        std::stringstream ss_line(line);
+        std::string value;
+        
+        std::getline(ss_line, value, ',');
+        point.time = std::stod(value);
+
+        std::getline(ss_line, value, ',');
+        point.x = std::stod(value);
+
+        std::getline(ss_line, value, ',');
+        point.y = std::stod(value);
+
+        std::getline(ss_line, value, ',');
+        point.theta = std::stod(value);
+
+        std::getline(ss_line, value, ',');
+        point.lin_velo = std::stod(value);
+
+        std::getline(ss_line, value, ',');
+        point.ang_velo = std::stod(value);
+
+        trajectory.points.push_back(point);
+        
+    }
+    return trajectory;
+}
+
+Trajectory path_one = load_trajectory_from_asset(path_one_data);
+Trajectory path_two = load_trajectory_from_asset(path_two_data);
