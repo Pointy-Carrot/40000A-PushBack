@@ -6,6 +6,7 @@
 #include "subsystems/pneumatics.h"
 #include "misc/autons.h"
 #include "misc/distance_reset.h"
+#include "ramsete/ramsete.h"
 
 void left_sawp(){};
 void right_sawp(){};
@@ -183,4 +184,16 @@ void prog_skills(){
     chassis.moveToPoint(-54, 20, 1000);
     chassis.swingToHeading(180, lemlib::DriveSide::LEFT, 500);
     chassis.moveToPoint(-56, -8, 1500);
+}
+
+void ramsete_prog(){
+    Trajectory myPath;
+    myPath.points = {
+        {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+        {0.5, 3.0, 0.0, 0.0, 6.0, 0.0},
+        {1.0, 12.0, 0.0, 0.0, 18.0, 0.0},
+        {1.5, 21.0, 0.0, 0.0, 6.0, 0.0},
+        {2.0, 24.0, 0.0, 0.0, 0.0, 0.0}
+    };
+    ramchassis.follow(myPath);
 }

@@ -4,10 +4,10 @@
 
 
 
-DistanceReset::DistanceReset(pros::Distance* left_sensor, float left_offset, pros::Distance* right_sensor, float right_offset)
+DistanceReset::DistanceReset(pros::Distance* left_sensor, double left_offset, pros::Distance* right_sensor, double right_offset)
     : left_sensor(left_sensor), left_offset(left_offset), right_sensor(right_sensor), right_offset(right_offset) {};
 
-float DistanceReset::mm_to_in(float mm){
+double DistanceReset::mm_to_in(double mm){
     return mm * 0.039;
 }
 
