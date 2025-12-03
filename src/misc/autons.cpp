@@ -17,6 +17,204 @@ void right_7_ball_split(){};
 void full_sawp(){};
 void prog_skills(){
     // initialization
+    chassis.setPose(-46, -9, 180);
+    intake.set_alliance_red();
+    intake.sort_on();
+    cata.down();
+    // intake bottom left pile
+    chassis.moveToPoint(-46, -24, 1000);
+    chassis.turnToPoint(-24, -24, 500);
+    chassis.moveToPoint(-24, -24, 1000, {.maxSpeed = 80});
+    pros::delay(500);
+    loader.extend();
+    // intake bottom right pile
+    chassis.moveToPoint(24, -24, 1000, {.maxSpeed = 80});
+    pros::delay(250);
+    loader.retract();
+    pros::delay(500);
+    loader.extend();
+    // intake top right pile
+    chassis.turnToPoint(24, 24, 500);
+    chassis.moveToPoint(24, 24, 1000, {.maxSpeed = 80});
+    pros::delay(250);
+    loader.retract();
+    pros::delay(500);
+    loader.extend();
+    // score bottom mid goal
+    chassis.turnToPoint(10, 10, 500);
+    chassis.moveToPoint(10, 10, 1000, {.maxSpeed = 50});
+    chassis.waitUntiDone();
+    intake.move(-90);
+    pros::delay(1500);
+    // intake top left pile
+    chassis.moveToPoint(10, 24, 1000, {.forward = false});
+    chassis.turnToPoint(-24, 24, 500);
+    intake.brake();
+    chassis.moveToPoint(-24, 24, 1000, {.maxSpeed = 80});
+    intake.move(127);
+    pros::delay(500);
+    loader.extend();
+    // clear blue park zone and intake blocks
+    chassis.turnToHeading(90, 750);
+    chassis.moveToPoint(57, 24, 1250);
+    pros::delay(750);
+    loader.retract();
+    chassis.swingToHeading(180, lemlib::DriveSide::RIGHT, 750);
+    chassis.waitUntilDone();
+    dist_reset.update_positiono(Sensor::LEFT, Direction::DOWN); // dist reset
+    chassis.moveToPoint(63, -35, 2000);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::LEFT, Direction::DOWN); // dist reset
+    // score top mid goal
+    chassis.moveToPoint(20, -20, 1000, {.forward = false});
+    intake.brake();
+    chassis.turnToPoint(0, 0, 500, {.forward = false});
+    chassis.moveToPoint(0, 0, 750, {.forward = false, .maxSpeed = 40});
+    cata.midgoal_mech_down();
+    chassis.moveToPoint(0, 0, 500, {.forward = false, .maxSpeed = 20});
+    pros::delay(250);
+    intake_while_scoring_mid();
+    pros::delay(250);
+    cata.down();
+    pros::delay(250);
+    cata.score_long();
+    pros::delay(500);
+    cata.down();
+    chassis.setPose(13, 13, chassis.getPose().theta);
+    // intake bottom mid pile
+    intake.sort_off();
+    chassis.moveToPoint(1, -39, 1250, {.maxSpeed = 80});
+    pros::delay(250);
+    cata.midgoal_mech_up();
+    // move to bottom left loader
+    chassis.moveToPoint(0, -24, 1000, {.forward = false});
+    pros::delay(100);
+    loader.extend();
+    chassis.turnToPoint(-24, -24, 500);
+    chassis.moveToPoint(-24, -24, 1000);
+    loader.retract();
+    chassis.moveToPoint(-46, -48, 1000);
+    chassis.turnToHeading(270, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::LEFT, Direction::LEFT);
+    // clear bottom left loader
+    chassis.moveToPoint(-90, -48, 1000, {.maxSpeed = 60});
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::LEFT, Direction::LEFT);
+    // move to bottom right long goal
+    chassis.moveToPoint(-24, -56, 1000, {.forward = false});
+    chassis.moveToPoint(24, -56, 1000, {.forward = false});
+    loader.retract();
+    intake.brake();
+    chassis.moveToPoint(40, -48, 1000, {.forward = false});
+    chassis.turnToHeading(90, 750);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
+    // score bottom right long goal first time
+    chassis.moveToPoint(0, -48, 500, {.forward = false, .maxSpeed = 80});
+    chassis.moveToPoint(0, -48, 500, {.forward = false, .maxSpeed = 15});
+    intake_while_scoring_long();
+    pros::delay(250);
+    cata.down();
+    pros::delay(250);
+    cata.score_long();
+    pros::delay(500);
+    cata.down();
+    chassis.setPose(30, -48, chassis.getPose().theta);
+    dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
+    // clear bottom right loader
+    chassis.moveToPoint(90, -48, 1500, {.maxSpeed = 60});
+    loader.extend();
+    chassis.turnToHeading(90, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
+    // score bottom right long goal second time
+    chassis.moveToPoint(0, -48, 1000, {.forward = false, .maxSpeed = 80});
+    chassis.moveToPoint(0, -48, 500, {.forward = false, .maxSpeed = 15});
+    cata.score_long();
+    pros::delay(500);
+    cata.down();
+    chassis.setPose(30, -48, chassis.getPose().theta);
+    dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
+    // intake top mid pile
+    chassis.swingToPoint(24, 24, lemlib::DriveSide::LEFT, 500);
+    chassis.moveToPoint(24, 24, 1000);
+    chassis.moveToPoint(0, 32, 1000);
+    chassis.turnToPoint(0, 39, 500);
+    chassis.moveToPoint(0, 39, 1000);
+    chassis.moveToPoint(0, 24, 1000, {.forward = false});
+    // move to top right loader
+    pros::delay(100);
+    loader.extend();
+    chassis.turnToPoint(24, 24, 500);
+    chassis.moveToPoint(24, 24, 1000);
+    loader.retract();
+    chassis.moveToPoint(46, 48, 1000);
+    chassis.turnToHeading(90, 500);
+    loader.extend();
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::LEFT, Direction::RIGHT);
+    // clear top right loader
+    chassis.moveToPosition(90, 48, 1000, {.maxSpeed = 60});
+    chassis.turnToHeading(90, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::LEFT, Direction::RIGHT);
+    // move to top left long goal
+    chassis.moveToPoint(24, 56, 1000, {.forward = false});
+    chassis.moveToPoint(-24, 56, 1000, {.forward = false});
+    loader.retract();
+    intake.brake();
+    chassis.moveToPoint(-40, 48, 1000, {.forward = false});
+    chassis.turnToHeading(270, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
+    // score top left long goal first time
+    chassis.moveToPoint(0, 48, 500, {.forward = false, .maxSpeed = 80});
+    chassis.moveToPoint(0, 48, 500, {.forward = false, .maxSpeed = 15});
+    intake_while_scoring_long();
+    pros::delay(250);
+    cata.down();
+    pros::delay(250);
+    cata.score_long();
+    pros::delay(500);
+    cata.down();
+    chassis.setPose(-30, 48, chassis.getPose().theta);
+    dist_reset.update_positon(Sensor::RIGHT, Direction::LEFT);
+    // clear top left loader
+    chassis.moveToPoint(90, 48, 1500, {.maxSpeed = 60});
+    chassis.turnToHeading(270, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
+    // score top left long goal second time
+    chassis.moveToPoint(0, 48, 1000, {.forward = false, .maxSpeed = 80});
+    chassis.moveToPoint(0, 48, 500, {.forward = false, .maxSpeed = 15});
+    cata.score_long();
+    pros::delay(500);
+    cata.down();
+    chassis.setPose(-30, 48, chassis.getPose().theta);
+    dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
+    // clear red park zone and park
+    chassis.moveToPoint(-57, 24, 1000);
+    chassis.swingToHeading(180, lemlib::DriveSide::LEFT, 500);
+    chassis.waitUntilDone();
+    dist_reset.update_position(Sensor::RIGHT, Direction::DOWN);
+    chassis.moveToPoint(-63, -4, 2000);
+    pros::delay(300);
+    loader.extend();
+    chassis.waitUntilDone();
+    loader.retract();
+    
+
+
+
+
+
+
+
+
+
+     /**   
+    // initialization
     chassis.setPose(-49, 18, 0);
     intake.sort_off();
     cata.down();
@@ -184,6 +382,7 @@ void prog_skills(){
     chassis.moveToPoint(-54, 20, 1000);
     chassis.swingToHeading(180, lemlib::DriveSide::LEFT, 500);
     chassis.moveToPoint(-56, -8, 1500);
+    */
 }
 
 void ramsete_test(){
