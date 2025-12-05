@@ -76,7 +76,7 @@ class IntakeSubsystem {
          * 
          * @return int (1->RED / 2->BLUE)
          */
-        int get_alliance_color();
+        void get_alliance_color();
 
         /**
          * @brief turn on color sort
