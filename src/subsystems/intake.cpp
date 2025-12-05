@@ -97,11 +97,11 @@ void IntakeSubsystem::sort(int alliance_color){
     }
 }
 
-int IntakeSubsystem::get_alliance_pot_selection(){
+void IntakeSubsystem::get_alliance_pot_selection(){
     if(alliance_pot->get_value()>2000){
-        return 1; // RED
+        alliance_color = 1; // RED
     } else{
-        return 2; // BLUE
+        alliance_color = 2; // BLUE
     }
 }
 
