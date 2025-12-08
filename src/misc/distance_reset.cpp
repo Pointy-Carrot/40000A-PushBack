@@ -44,10 +44,3 @@ void DistanceReset::update_position(Sensor sensor_selection, Direction direction
         }
     }
 }
-
-
-
-
-
-
-DistanceReset dist_reset(&left_dist, 6.3, &right_dist, 5.784);
