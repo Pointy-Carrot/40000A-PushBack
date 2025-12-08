@@ -24,9 +24,3 @@ bool PneumaticsSubsystem::is_extended(){
 void PneumaticsSubsystem::set_value(int value){
     piston->set_value(value);
 }
-
-
-PneumaticsSubsystem wing(&wing_piston);
-PneumaticsSubsystem loader(&loader_piston);
-PneumaticsSubsystem gate(&gate_piston);
-PneumaticsSubsystem midgoal_switch(&midgoal_piston);
