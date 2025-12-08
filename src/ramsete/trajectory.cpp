@@ -1,3 +1,5 @@
+/*
+
 #include "ramsete/trajectory.h"
 #include <sstream>
 #include "ramsete/static_paths.h"
@@ -102,3 +104,4 @@ Trajectory load_trajectory_from_asset(const char* path_data){
 
 Trajectory path_one = load_trajectory_from_asset(path_one_data);
 Trajectory path_two = load_trajectory_from_asset(path_two_data);
+*/

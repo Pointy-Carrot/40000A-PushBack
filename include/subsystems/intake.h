@@ -105,7 +105,6 @@ class IntakeSubsystem {
         /**
          * @brief Get the alliance potentiometer selection
          * 
-         * @return int (1->RED / 2->BLUE)
          */
         void get_alliance_pot_selection();
 };

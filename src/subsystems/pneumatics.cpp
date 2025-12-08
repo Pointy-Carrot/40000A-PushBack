@@ -1,5 +1,4 @@
 #include "subsystems/pneumatics.h"
-#include "initialization/pneumatics_initialization.h"
 #include "pros/adi.hpp"
 
 PneumaticsSubsystem::PneumaticsSubsystem(pros::adi::Pneumatics* piston) 

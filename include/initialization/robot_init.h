@@ -9,7 +9,6 @@
 #include "ramsete/ramsete.h"
 
 
-
 // explicit drive init
 extern DriveExplicit explicitchassis;
 

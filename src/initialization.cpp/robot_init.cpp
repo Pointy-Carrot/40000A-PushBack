@@ -1,4 +1,7 @@
-include "initialization/robot_init.h"
+#include "initialization/robot_init.h"
+#include "initialization/sensor_initialization.h"
+#include "initialization/motor_initialization.h"
+#include "initialization/pneumatics_initialization.h"
 
 // explicit drive init
 DriveExplicit explicitchassis(&DL, &DR);

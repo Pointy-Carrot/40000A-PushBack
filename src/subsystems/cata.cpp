@@ -1,6 +1,4 @@
 #include "subsystems/cata.h"
-#include "initialization/motor_initialization.h"
-#include "initialization/sensor_initialization.h"
 #include "lemlib/pid.hpp"
 #include "pros/adi.hpp"
 #include "pros/motors.h"
