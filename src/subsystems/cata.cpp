@@ -89,5 +89,3 @@ float CataSubsystem::get_midgoal_position(){
 float CataSubsystem::get_half_position(){
     return half_position;
 }
-
-CataSubsystem cata(&cata_motor, &cata_pot, &gate, &midgoal_switch, 0, 0, 0); // TUNE
