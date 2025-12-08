@@ -4,7 +4,7 @@
 #include "pros/misc.hpp"
 #include "initialization/controller_initialization.h"
 #include "pros/motors.h"
-#include "subsystems/chassis_config.h"
+#include "initialization/robot_init.h"
 #include "subsystems/scoring_system.h"
 #include "subsystems/intake.h"
 #include "subsystems/cata.h"
