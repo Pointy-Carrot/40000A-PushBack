@@ -6,7 +6,7 @@
 #include "subsystems/intake.h"
 #include "subsystems/pneumatics.h"
 #include "misc/distance_reset.h"
-#include "ramsete/ramsete.h"
+//#include "ramsete/ramsete.h"
 
 
 // explicit drive init
@@ -37,4 +37,4 @@ extern DistanceReset dist_reset;
 extern CataSubsystem cata; // after gate and midgoal switch
 
 // ramsete init
-extern Ramsete ramchassis; // after chassis
+//extern Ramsete ramchassis; // after chassis

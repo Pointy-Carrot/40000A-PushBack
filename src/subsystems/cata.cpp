@@ -5,6 +5,8 @@
 #include "subsystems/pneumatics.h"
 
 
+CataState cata_position;
+
 CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch, float kP, float kI, float kD) 
     : cata(cata), cata_pot(cata_pot), gate(gate), midgoal_switch(midgoal_switch), cata_pid(kP, kI, kD) {};
 

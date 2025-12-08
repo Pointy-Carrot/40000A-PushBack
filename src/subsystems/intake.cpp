@@ -3,7 +3,8 @@
 #include "pros/optical.hpp"
 #include "subsystems/scoring_system.h"
 
-
+IntakeState intake_state;
+PreviousIntakeState prev_intake_state;
 
 IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Motor* sorter, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot)
     : intake(intake), sorter(sorter), sort_sensor(sort_sensor), alliance_pot(alliance_pot) {};
