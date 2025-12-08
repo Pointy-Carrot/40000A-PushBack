@@ -3,8 +3,9 @@
 #include "subsystems/intake.h"
 #include "subsystems/cata.h"
 #include "initialization/controller_initialization.h"
+#include "initialization/robot_init.h"
 #include "initialization/sensor_initialization.h"
-#include "subsystems/pneumatics.h"
+
 
 bool midgoal = false;
 bool manual_cata_control = false;

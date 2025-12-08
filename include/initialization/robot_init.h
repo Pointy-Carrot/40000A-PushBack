@@ -5,9 +5,7 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "subsystems/intake.h"
 #include "subsystems/pneumatics.h"
-#include "subsystems/scoring_system.h"
-#include "mist/distance_reset.h"
-#include "ramsete/trajectory.h"
+#include "misc/distance_reset.h"
 #include "ramsete/ramsete.h"
 
 

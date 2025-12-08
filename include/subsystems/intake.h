@@ -76,7 +76,7 @@ class IntakeSubsystem {
          * 
          * @return int (1->RED / 2->BLUE)
          */
-        void get_alliance_color();
+        int get_alliance_color();
 
         /**
          * @brief turn on color sort
@@ -107,7 +107,7 @@ class IntakeSubsystem {
          * 
          * @return int (1->RED / 2->BLUE)
          */
-        int get_alliance_pot_selection();
+        void get_alliance_pot_selection();
 };
 
 extern IntakeState intake_state;

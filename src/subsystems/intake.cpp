@@ -1,6 +1,4 @@
 #include "subsystems/intake.h"
-#include "initialization/motor_initialization.h"
-#include "initialization/sensor_initialization.h"
 #include "pros/adi.hpp"
 #include "pros/optical.hpp"
 #include "subsystems/scoring_system.h"
