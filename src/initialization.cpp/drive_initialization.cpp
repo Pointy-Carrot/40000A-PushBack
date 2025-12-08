@@ -14,5 +14,3 @@ void DriveExplicit::move_drive(double DL_rpm, double DR_rpm){
     DL->move(DL_rpm);
     DR->move(DR_rpm);
 }
-
-DriveExplicit explicitchassis(&DL, &DR);
