@@ -59,7 +59,7 @@ class Trajectory {
 
 };
 
-extern Trajectory load_trajectory_from_asset(const char* path_data);
+extern Trajectory load_trajectory_from_asset;
 
 extern Trajectory path_one;
 extern Trajectory path_two;
