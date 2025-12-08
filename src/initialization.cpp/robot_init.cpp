@@ -19,9 +19,6 @@ PneumaticsSubsystem loader(&loader_piston);
 PneumaticsSubsystem gate(&gate_piston);
 PneumaticsSubsystem midgoal_switch(&midgoal_piston);
 
-// scoring system init
-extern Color alliance_color;
-
 // dist reset init
 DistanceReset dist_reset(&left_dist, 6.3, &right_dist, 5.784);
 
