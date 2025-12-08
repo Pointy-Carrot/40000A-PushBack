@@ -44,9 +44,3 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
                             &imu // inertial sensor
 );
-
-lemlib::Chassis chassis(drivetrain, // drivetrain
-                        lateral_controller, // lateral pid
-                        angular_controller, // angular pid
-                        sensors // odom sensors
-);
