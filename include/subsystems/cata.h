@@ -171,5 +171,4 @@ class CataSubsystem {
         float get_half_position();
 };
 
-extern CataSubsystem cata;
 extern CataState cata_position;
