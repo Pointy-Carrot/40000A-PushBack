@@ -61,10 +61,10 @@ WheelSpeeds Ramsete::to_wheel_speeds(const ChassisSpeeds& speeds){
 }
 
 WheelSpeeds Ramsete::wheel_velo_in_per_sec_to_rpm(const WheelSpeeds& wheel_speeds){
-    double left_rpm = (wheel_speeds.left / 60.0) * diameter_to_circumference(wheel_diameter);
-    double right_rpm = (wheel_speeds.right / 60.0) * diameter_to_circumference(wheel_diameter);
-    double clamped_left_rpm = std::max(-600.0, std::min(600.0, left_rpm));
-    double clamped_right_rpm = std::max(-600.0, std::min(600.0, right_rpm));
+    double left_rpm = (wheel_speeds.left / diameter_to_circumference(wheel_diameter)) * 60.0;
+    double right_rpm = (wheel_speeds.right / diameter_to_circumference(wheel_diameter)) * 60.0;
+    double clamped_left_rpm = std::clamp(left_rpm, -600.0, 600.0);
+    double clamped_right_rpm = std::clamp(right_rpm, -600.0, 600.0);
     return {clamped_left_rpm, clamped_right_rpm};
 }
 
@@ -79,6 +79,7 @@ void Ramsete::follow(const Trajectory& path){
     Pose2d current_pose;
     
     while(path_time <= path.getTotalTime()){
+        path_time = (pros::millis() / 1000.0) - start_time;
 
         TrajectoryPoint desired_state = path.sample(path_time);
 
@@ -86,11 +87,11 @@ void Ramsete::follow(const Trajectory& path){
         current_pose.y = chassis->getPose().y;
         current_pose.theta = chassis->getPose(true).theta;
 
-        ChassisSpeeds target_speeds = ramchassis.calculate(current_pose, desired_state);
+        ChassisSpeeds target_speeds = calculate(current_pose, desired_state);
 
-        WheelSpeeds wheel_speeds_in_per_sec = ramchassis.to_wheel_speeds(target_speeds);
+        WheelSpeeds wheel_speeds_in_per_sec = to_wheel_speeds(target_speeds);
 
-        WheelSpeeds wheel_speeds_rpm = ramchassis.wheel_velo_in_per_sec_to_rpm(wheel_speeds_in_per_sec);
+        WheelSpeeds wheel_speeds_rpm = wheel_velo_in_per_sec_to_rpm(wheel_speeds_in_per_sec);
 
 
         explicitchassis.move_drive(wheel_speeds_rpm.left, wheel_speeds_rpm.right);
