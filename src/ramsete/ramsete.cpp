@@ -113,6 +113,3 @@ void autonomous() {
     };
     ramchassis.follow(myPath);
 }
-
-
-Ramsete ramchassis(&chassis, 10.724, lemlib::Omniwheel::NEW_275, 2.0, 0.7);
