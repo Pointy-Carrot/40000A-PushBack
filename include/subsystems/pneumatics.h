@@ -47,8 +47,3 @@ class PneumaticsSubsystem{
          */
         void toggle();
 };
-
-extern PneumaticsSubsystem wing;
-extern PneumaticsSubsystem loader;
-extern PneumaticsSubsystem gate;
-extern PneumaticsSubsystem midgoal_switch;
