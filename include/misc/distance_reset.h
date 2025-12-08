@@ -29,5 +29,3 @@ class DistanceReset {
 
         double mm_to_in(double mm);
 };
-
-extern DistanceReset dist_reset;
