@@ -29,5 +29,3 @@ class DriveExplicit {
          */
         void move_drive(double DL_rpm, double DR_rpm);
 };
-
-extern DriveExplicit explicitchassis;
