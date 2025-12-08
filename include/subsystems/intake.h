@@ -110,6 +110,5 @@ class IntakeSubsystem {
         int get_alliance_pot_selection();
 };
 
-extern IntakeSubsystem intake;
 extern IntakeState intake_state;
 extern PreviousIntakeState prev_intake_state;
