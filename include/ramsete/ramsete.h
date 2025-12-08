@@ -84,10 +84,3 @@ class Ramsete {
         double diameter_to_circumference(double diameter);
 
 };
-
-
-
-
-
-
-extern Ramsete ramchassis;
