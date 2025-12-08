@@ -124,8 +124,3 @@ void IntakeSubsystem::set_alliance_blue(){
 int IntakeSubsystem::get_alliance_color(){
     return alliance_color;
 }
-
-
-
-
-IntakeSubsystem intake(&intake_motor, &colorsort_motor, &colorsort_optical, &alliance_selector_pot);
