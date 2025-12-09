@@ -37,12 +37,15 @@ void left_sawp(){
     chassis.moveToPoint(-22, -22, 1000);
     pros::delay(650);
     loader.extend();
-    chassis.turnToPoint(-12, -12, 500);
-    chassis.moveToPoint(-12, -12, 1000, {.maxSpeed = 60});
-    loader.retract();
+    // score bottom mid goal
+    chassis.turnToPoint(0, 0, 500, {.forwards = false});
+    chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
     intake.move(-127);
+    loader.retract();
     chassis.waitUntilDone();
     pros::delay(1000);
+    chassis.setPose(-10, -10, chassis.getPose().theta);
     // clear top left loader
     chassis.moveToPoint(-26, -12, 1000, {.forwards = false});
     chassis.turnToPoint(-46, 48, 500);
@@ -81,12 +84,14 @@ void right_sawp(){
     loader.retract();
     // score low mid goal
     chassis.moveToPoint(-24, -24, 1000, {.forwards = false});
-    chassis.turnToPoint(-12, -12, 500);
+    chassis.turnToPoint(0, 0, 500, {.forwards = false});
     intake.brake();
-    chassis.moveToPoint(-12, -12, 1000, {.maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
     intake.move(-127);
     chassis.waitUntilDone();
     pros::delay(1000);
+    chassis.setPose(-10, -10, chassis.getPose().theta);
     // intake top left pile
     chassis.moveToPoint(-22, -12, 1000, {.forwards = false});
     chassis.turnToPoint(-22, 22, 500);
@@ -180,12 +185,14 @@ void right_7_ball_split(){
     pros::delay(500);
     loader.extend();
     // score bottom mid goal
-    chassis.turnToPoint(-12, -12, 500);
-    chassis.moveToPoint(-12, -12, 1000, {.maxSpeed = 60});
+    chassis.turnToPoint(0, 0, 500, {.forwards = false});
+    chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
     intake.move(-127);
     loader.retract();
     chassis.waitUntilDone();
     pros::delay(1000);
+    chassis.setPose(-10, -10, chassis.getPose().theta);
     // clear bottom left loader
     chassis.moveToPoint(-46, -48, 1000, {.forwards = false});
     chassis.turnToHeading(270, 750);
@@ -271,12 +278,14 @@ void right_9_ball_split(){
     loader.retract();
     // score low mid goal
     chassis.moveToPoint(-24, -24, 1000, {.forwards = false});
-    chassis.turnToPoint(-12, -12, 500);
+    chassis.turnToPoint(0, 0, 500, {.forwards = false});
     intake.brake();
-    chassis.moveToPoint(-12, -12, 1000, {.maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
+    chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
     intake.move(-127);
     chassis.waitUntilDone();
     pros::delay(1000);
+    chassis.setPose(-10, -10, chassis.getPose().theta);
     // clear bottom left loader
     chassis.moveToPoint(-46, -48, 1000, {.forwards = false});
     pros::delay(500);
