@@ -7,8 +7,8 @@
 
 CataState cata_position;
 
-CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch, float kP, float kI, float kD) 
-    : cata(cata), cata_pot(cata_pot), gate(gate), midgoal_switch(midgoal_switch), cata_pid(kP, kI, kD) {};
+CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch) 
+    : cata(cata), cata_pot(cata_pot), gate(gate), midgoal_switch(midgoal_switch) {};
 
 void CataSubsystem::setDownPosition(float position){
     down_position = position;
@@ -63,7 +63,18 @@ bool CataSubsystem::is_halfway_up(){
 }
 
 void CataSubsystem::move_to(float position){
-    cata->move(cata_pid.update(position - cata_pot->get_value()));
+    if(position > cata_pot->get_value()){
+        cata->move(-127);
+        while(position > cata_pot->get_value()){
+            pros::delay(10);
+        }
+    } else if(position < cata_pot->get_value()){
+        cata->move(127);
+        while(position < cata_pot->get_value()){
+            pros::delay(10);
+        }
+    }
+    cata.brake();
 }
 
 void CataSubsystem::midgoal_mech_up(){
