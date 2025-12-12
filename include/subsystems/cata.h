@@ -10,7 +10,6 @@ enum CataState {LONGGOAL, MIDGOAL, DOWN, HALF};
 class CataSubsystem {
     private:
         
-        lemlib::PID cata_pid;
         float down_position;
         float long_goal_position;
         float midgoal_position;
@@ -28,8 +27,10 @@ class CataSubsystem {
          * 
          * @param cata cata motor
          * @param cata_pot cata potentiometer
+         * @param gate gate piston
+         * @param midgoal_switch midgoal switch piston
          */
-        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch, float kP, float kI, float kD);
+        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch);
 
         /**
          * @brief Set the Down Position of the cata
