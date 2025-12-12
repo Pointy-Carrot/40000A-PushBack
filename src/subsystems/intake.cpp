@@ -6,8 +6,8 @@
 IntakeState intake_state;
 PreviousIntakeState prev_intake_state;
 
-IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Motor* sorter, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot)
-    : intake(intake), sorter(sorter), sort_sensor(sort_sensor), alliance_pot(alliance_pot) {};
+IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot)
+    : intake(intake), sort_sensor(sort_sensor), alliance_pot(alliance_pot) {};
 
 void IntakeSubsystem::move(int voltage){
     volts = voltage;
@@ -22,7 +22,6 @@ void IntakeSubsystem::move(int voltage){
 
 void IntakeSubsystem::set_brake_mode(pros::motor_brake_mode_e brake_mode){
     intake->set_brake_mode(brake_mode);
-    sorter->set_brake_mode(brake_mode);
 }
 
 void IntakeSubsystem::brake(){
