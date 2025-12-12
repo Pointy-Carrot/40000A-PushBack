@@ -13,21 +13,25 @@ bool slow_cata = false;
 bool colorsort_on = true;
 
 void intake_while_scoring_long(){
-    cata.score_long();
-    while(!cata.is_halfway_up()){ // wait until cata is halfway up before continuing intake
-        intake.brake();
-        pros::delay(10);
-    }
-    intake.move(127);
+	pros::Task intake_while_scoring_long_task([]{
+    	cata.score_long();
+    	while(!cata.is_halfway_up()){ // wait until cata is halfway up before continuing intake
+    	    intake.brake();
+    	    pros::delay(10);
+    	}
+    	intake.move(127);
+	});
 }
 
 void intake_while_scoring_mid(){
-    cata.score_mid();
-    while(!cata.is_halfway_up()){ // wait until cata is halfway up before continuing intake
-        intake.brake();
-        pros::delay(10);
-    }
-    intake.move(127);
+	pros::Task intake_while_scoring_mid_task([]{
+    	cata.score_mid();
+    	while(!cata.is_halfway_up()){ // wait until cata is halfway up before continuing intake
+        	intake.brake();
+        	pros::delay(10);
+    	}
+    	intake.move(127);
+	});
 }
 
 void scoring_system_controller(){ // main intake/cata command loop
@@ -36,22 +40,18 @@ void scoring_system_controller(){ // main intake/cata command loop
         switch(intake_state){
             case INTAKE:
                 intake_motor.move(intake.volts);
-                colorsort_motor.move(intake.volts);
                 if(colorsort_on){
                     intake.sort(intake.get_alliance_color());
                 }
                 break;
             case OUTTAKE:
                 intake_motor.move(intake.volts);
-                colorsort_motor.move(intake.volts);
                 break;
             case SORT:
-                intake_motor.move(127);
-                colorsort_motor.move(-127);
+                intake_motor.move(-127);
                 break;
             case STOP:
                 intake_motor.brake();
-                colorsort_motor.brake();
                 break;
         }
         
@@ -81,14 +81,12 @@ void scoring_system_controller(){ // main intake/cata command loop
 }
 
 void driver_intake(){
-    if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){ // L1 -> intake
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){ // L1 -> intake
 		intake.move(127);
-	} else if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)){ // L2 -> if stopped then reverse, if moving then stop
-		if(intake_state == STOP){
-			intake.move(-127);
-		} else{
-			intake.brake();
-		}
+	} else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){ // L2 -> if stopped then reverse, if moving then stop
+		intake.move(-127);
+	} else {
+		intake.brake();
 	}
 
     // colorsort switch
