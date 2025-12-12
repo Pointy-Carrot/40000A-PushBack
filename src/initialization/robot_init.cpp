@@ -54,7 +54,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain
 );
 
 // intake init
-IntakeSubsystem intake(&intake_motor, &colorsort_motor, &colorsort_optical, &alliance_selector_pot);
+IntakeSubsystem intake(&intake_motor, &colorsort_optical, &alliance_selector_pot);
 
 // pneumatics init
 PneumaticsSubsystem wing(&wing_piston);
