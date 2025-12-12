@@ -66,7 +66,7 @@ PneumaticsSubsystem midgoal_switch(&midgoal_piston);
 DistanceReset dist_reset(&left_dist, 6.3, &right_dist, 5.784);
 
 // cata init
-CataSubsystem cata(&cata_motor, &cata_pot, &gate, &midgoal_switch, 0, 0, 0); // TUNE // after gate and midgoal switch
+CataSubsystem cata(&cata_motor, &cata_pot, &gate, &midgoal_switch); // after gate and midgoal switch
 
 // ramsete init
 //Ramsete ramchassis(&chassis, 10.724, lemlib::Omniwheel::NEW_275, 2.0, 0.7); // after chassis
