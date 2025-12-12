@@ -1,5 +1,4 @@
 #include "subsystems/cata.h"
-#include "lemlib/pid.hpp"
 #include "pros/adi.hpp"
 #include "pros/motors.h"
 #include "subsystems/pneumatics.h"
@@ -74,7 +73,7 @@ void CataSubsystem::move_to(float position){
             pros::delay(10);
         }
     }
-    cata.brake();
+    cata->brake();
 }
 
 void CataSubsystem::midgoal_mech_up(){

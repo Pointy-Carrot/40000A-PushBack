@@ -2,7 +2,6 @@
 #include "pros/motors.h"
 #include "pros/motors.hpp"
 #include "pros/adi.hpp"
-#include "lemlib/pid.hpp"
 #include "subsystems/pneumatics.h"
 
 enum CataState {LONGGOAL, MIDGOAL, DOWN, HALF};
