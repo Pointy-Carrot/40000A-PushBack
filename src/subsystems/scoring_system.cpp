@@ -152,7 +152,7 @@ void driver_cata(){
 	}
 
     // manual cata control switch
-	if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){ // B -> toggle manual cata control on/off
+	if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){ // A -> toggle manual cata control on/off
 		if(manual_cata_control){ 
 			manual_cata_control = false;
 		} else{
@@ -185,7 +185,7 @@ void driver_wing(){
 }
 
 void driver_loader(){
-    if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
+    if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){ // B -> toggle loader up/down
         loader.toggle();
     }
 }
