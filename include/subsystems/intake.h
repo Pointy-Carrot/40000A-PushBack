@@ -11,7 +11,6 @@ enum PreviousIntakeState {INTAKING, OUTTAKING, SORTING, STOPPED};
 class IntakeSubsystem {
     public:
         pros::Motor* intake;
-        pros::Motor* sorter;
         pros::Optical* sort_sensor;
         pros::adi::Potentiometer* alliance_pot;
         int alliance_color;
@@ -21,10 +20,9 @@ class IntakeSubsystem {
          * @brief intake constructor
          * 
          * @param intake intake motor
-         * @param sorter color sort motor
          * @param sort_sensor color sort optical sensor
          */
-        IntakeSubsystem(pros::Motor* intake, pros::Motor* sorter, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot);
+        IntakeSubsystem(pros::Motor* intake, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot);
 
         /**
          * @brief spin the intake at a specified voltage
