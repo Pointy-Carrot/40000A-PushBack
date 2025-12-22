@@ -172,3 +172,4 @@ class CataSubsystem {
 };
 
 extern CataState cata_position;
+extern CataState prev_cata_position;

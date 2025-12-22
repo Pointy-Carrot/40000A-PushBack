@@ -5,17 +5,15 @@
 #include "pros/optical.hpp"
 #include "pros/rotation.hpp"
 
-pros::Distance front_dist(10);
-pros::Distance back_dist(11);
-pros::Distance left_dist(12);
-pros::Distance right_dist(13);
+pros::Distance left_dist(16);
+pros::Distance right_dist(2);
 
-pros::Optical colorsort_optical(14);
+pros::Optical colorsort_optical(20);
 
-pros::adi::Potentiometer cata_pot('D');
-pros::adi::Potentiometer alliance_selector_pot('E');
+pros::adi::Potentiometer cata_pot('E');
+pros::adi::Potentiometer alliance_selector_pot('D');
 
-pros::Rotation horiz_tracker(15);
-pros::Rotation vert_tracker(16);
+pros::Rotation horiz_tracker(-17);
+pros::Rotation vert_tracker(19);
 
-pros::Imu imu(17);
+pros::Imu imu(4);

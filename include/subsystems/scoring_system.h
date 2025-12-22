@@ -48,6 +48,11 @@ void driver_cata();
  */
 void driver_wing();
 
+/**
+ * @brief driver loader control
+ * 
+ */
+void driver_loader();
 
 
 extern Color alliance_color;

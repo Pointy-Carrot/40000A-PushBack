@@ -2,8 +2,8 @@
 #include "pros/abstract_motor.hpp"
 #include "pros/motor_group.hpp"
 
-pros::MotorGroup DL({1, 2, 3}, pros::MotorGearset::blue);
-pros::MotorGroup DR({4, 5, 6}, pros::MotorGearset::blue);
+pros::MotorGroup DL({-10, 6, -5}, pros::MotorGearset::blue);
+pros::MotorGroup DR({-9, 8, 7}, pros::MotorGearset::blue);
 
 
 DriveExplicit::DriveExplicit(pros::MotorGroup* DL, pros::MotorGroup* DR)

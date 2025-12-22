@@ -29,6 +29,7 @@ extern PneumaticsSubsystem wing;
 extern PneumaticsSubsystem loader;
 extern PneumaticsSubsystem gate;
 extern PneumaticsSubsystem midgoal_switch;
+extern PneumaticsSubsystem odom_lift;
 
 // dist reset init
 extern DistanceReset dist_reset;

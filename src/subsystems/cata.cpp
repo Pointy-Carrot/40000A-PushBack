@@ -3,26 +3,30 @@
 #include "pros/motors.h"
 #include "subsystems/pneumatics.h"
 
-
-CataState cata_position;
+CataState cata_position = DOWN;
+CataState prev_cata_position = DOWN;
 
 CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch) 
     : cata(cata), cata_pot(cata_pot), gate(gate), midgoal_switch(midgoal_switch) {};
 
 void CataSubsystem::setDownPosition(float position){
     down_position = position;
+    // std::cout<<down_position<<std::endl;
 }
 
 void CataSubsystem::setLongGoalPosition(float position){
     long_goal_position = position;
+    // std::cout<<long_goal_position<<std::endl;
 }
 
 void CataSubsystem::setMidgoalPosition(float position){
     midgoal_position = position;
+    // std::cout<<midgoal_position<<std::endl;
 }
 
 void CataSubsystem::setHalfPosition(float position){
     half_position = position;
+    // std::cout<<half_position<<std::endl;
 }
 
 void CataSubsystem::score_long(){
@@ -54,7 +58,7 @@ void CataSubsystem::brake(){
 }
 
 bool CataSubsystem::is_halfway_up(){
-    if(cata_pot->get_value() >= half_position){
+    if(cata_pot->get_value() <= half_position){
         return true;
     } else{
         return false;
@@ -62,14 +66,16 @@ bool CataSubsystem::is_halfway_up(){
 }
 
 void CataSubsystem::move_to(float position){
-    if(position > cata_pot->get_value()){
-        cata->move(-127);
-        while(position > cata_pot->get_value()){
-            pros::delay(10);
-        }
-    } else if(position < cata_pot->get_value()){
+    if(position < cata_pot->get_value()){
         cata->move(127);
         while(position < cata_pot->get_value()){
+            cata->move(127);
+            pros::delay(10);
+        }
+    } else if(position > cata_pot->get_value()){
+        cata->move(-127);
+        while(position > cata_pot->get_value()){
+            cata->move(-127);
             pros::delay(10);
         }
     }

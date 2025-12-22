@@ -6,7 +6,6 @@
 
 enum Color {RED, BLUE, NONE};
 enum IntakeState {INTAKE, OUTTAKE, SORT, STOP};
-enum PreviousIntakeState {INTAKING, OUTTAKING, SORTING, STOPPED};
 
 class IntakeSubsystem {
     public:
@@ -30,6 +29,13 @@ class IntakeSubsystem {
          * @param voltage voltage
          */
         void move(int voltage);
+
+        /**
+         * @brief helper function for move
+         * 
+         * @param volts voltage
+         */
+        void move_velo(int volts);
 
         /**
          * @brief Set the brake mode of the intake
@@ -108,4 +114,4 @@ class IntakeSubsystem {
 };
 
 extern IntakeState intake_state;
-extern PreviousIntakeState prev_intake_state;
+extern IntakeState prev_intake_state;

@@ -3,21 +3,25 @@
 #include "pros/optical.hpp"
 #include "subsystems/scoring_system.h"
 
-IntakeState intake_state;
-PreviousIntakeState prev_intake_state;
+IntakeState intake_state = STOP;
+IntakeState prev_intake_state = STOP;
 
 IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot)
     : intake(intake), sort_sensor(sort_sensor), alliance_pot(alliance_pot) {};
 
 void IntakeSubsystem::move(int voltage){
     volts = voltage;
-    if(volts > 0){ // if voltage positive, intake
+    if(voltage > 0){
         intake_state = INTAKE;
-    } else if(volts < 0){ // if voltage negative, outtake
+    } else if(voltage < 0){
         intake_state = OUTTAKE;
-    } else if(volts == 0){ // if voltage equals zero, stop
+    } else {
         intake_state = STOP;
     }
+}
+
+void IntakeSubsystem::move_velo(int volts){
+    intake->move(volts);
 }
 
 void IntakeSubsystem::set_brake_mode(pros::motor_brake_mode_e brake_mode){
@@ -26,37 +30,38 @@ void IntakeSubsystem::set_brake_mode(pros::motor_brake_mode_e brake_mode){
 
 void IntakeSubsystem::brake(){
     intake_state = STOP;
+    intake->brake();
 }
 
 void IntakeSubsystem::store_current_intake_state(){
     switch(intake_state){
         case INTAKE:
-            prev_intake_state = INTAKING;
+            prev_intake_state = INTAKE;
             break;
         case OUTTAKE:
-            prev_intake_state = OUTTAKING;
+            prev_intake_state = OUTTAKE;
             break;
         case SORT:
-            prev_intake_state = SORTING;
+            prev_intake_state = SORT;
             break;
         case STOP:
-            prev_intake_state = STOPPED;
+            prev_intake_state = STOP;
             break;
     }
 }
 
 void IntakeSubsystem::retrieve_previous_intake_state(){
     switch(prev_intake_state){
-        case INTAKING:
+        case INTAKE:
             intake_state = INTAKE;
             break;
-        case OUTTAKING:
+        case OUTTAKE:
             intake_state = OUTTAKE;
             break;
-        case SORTING:
+        case SORT:
             intake_state = SORT;
             break;
-        case STOPPED:
+        case STOP:
             intake_state = STOP;
             break;
     }

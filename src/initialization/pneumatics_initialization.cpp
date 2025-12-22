@@ -3,5 +3,6 @@
 
 pros::adi::Pneumatics gate_piston('A', false);
 pros::adi::Pneumatics midgoal_piston('B', true);
-pros::adi::Pneumatics loader_piston('C', false);
-pros::adi::Pneumatics wing_piston('D', false);
+pros::adi::Pneumatics loader_piston('H', false);
+pros::adi::Pneumatics wing_piston('C', false);
+pros::adi::Pneumatics odom_lift_piston('F', false);

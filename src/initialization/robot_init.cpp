@@ -2,6 +2,7 @@
 #include "initialization/sensor_initialization.h"
 #include "initialization/motor_initialization.h"
 #include "initialization/pneumatics_initialization.h"
+#include "subsystems/pneumatics.h"
 
 // explicit drive init
 DriveExplicit explicitchassis(&DL, &DR);
@@ -61,9 +62,10 @@ PneumaticsSubsystem wing(&wing_piston);
 PneumaticsSubsystem loader(&loader_piston);
 PneumaticsSubsystem gate(&gate_piston);
 PneumaticsSubsystem midgoal_switch(&midgoal_piston);
+PneumaticsSubsystem odom_lift(&odom_lift_piston);
 
 // dist reset init
-DistanceReset dist_reset(&left_dist, 6.3, &right_dist, 5.784);
+DistanceReset dist_reset(&left_dist, 5.784, &right_dist, 5.784);
 
 // cata init
 CataSubsystem cata(&cata_motor, &cata_pot, &gate, &midgoal_switch); // after gate and midgoal switch
