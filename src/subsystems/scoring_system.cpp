@@ -31,31 +31,9 @@ void intake_while_scoring_mid(){
     cata.score_mid();
 }
 
-void scoring_system_controller(){ // main intake/cata command loop
-    pros::Task scoring_system_task([]{
+void cata_controller(){ // main intake/cata command loop
+    pros::Task cata_task([]{
         while(1){
-        // all scoring subsystem controls
-        
-        // intake controls
-        switch(intake_state){
-            case INTAKE:
-                intake.move_velo(intake.volts);
-                // IS BREAKING THINGS
-                // if(colorsort_on){ 
-                //     intake.sort(intake.get_alliance_color());
-                // }
-                break;
-            case OUTTAKE:
-                intake.move_velo(intake.volts);
-                break;
-            case SORT:
-                intake.move_velo(-127);
-                break;
-            case STOP:
-                intake.brake();
-                break;
-        }
-        
         // cata controls
         switch(cata_position){
             case LONGGOAL:
@@ -90,6 +68,32 @@ void scoring_system_controller(){ // main intake/cata command loop
 
         // delay to save resources
         pros::delay(20);
+    }
+    });
+}
+
+void intake_controller(){
+    pros::Task intake_task([]{
+        while(1){
+        // intake controls
+        switch(intake_state){
+            case INTAKE:
+                intake.move_velo(intake.volts);
+                // IS BREAKING THINGS
+                // if(colorsort_on){ 
+                //     intake.sort(intake.get_alliance_color());
+                // }
+                break;
+            case OUTTAKE:
+                intake.move_velo(intake.volts);
+                break;
+            case SORT:
+                intake.move_velo(-127);
+                break;
+            case STOP:
+                intake.brake();
+                break;
+        }
     }
     });
 }

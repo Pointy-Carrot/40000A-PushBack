@@ -19,10 +19,16 @@ void intake_while_scoring_long();
 void intake_while_scoring_mid();
 
 /**
- * @brief primary task for controlling all scoring subsystems
+ * @brief primary task for controlling cata
  * 
  */
-void scoring_system_controller();
+void cata_controller();
+
+/**
+ * @brief primary task for controlling intake
+ * 
+ */
+void intake_controller();
 
 /**
  * @brief Set the alliance color for color sorting

@@ -17,11 +17,12 @@ void initialize() {
 	colorsort_optical.set_led_pwm(100);
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	cata.setDownPosition(3700); // TUNE
+	cata.setDownPosition(3600); // TUNE
 	cata.setHalfPosition(1800); // TUNE
 	cata.setLongGoalPosition(600); // TUNE
 	cata.setMidgoalPosition(400); // TUNE
-	scoring_system_controller(); // main control loop
+	cata_controller(); // cata control loop
+	intake_controller(); // intake control loop
 }
 
 void disabled() {}
