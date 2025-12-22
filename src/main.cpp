@@ -10,6 +10,8 @@
 #include "subsystems/cata.h"
 #include "misc/autons.h"
 #include "initialization/sensor_initialization.h"
+#include "initialization/pneumatics_initialization.h"
+
 
 void initialize() {
 	pros::lcd::initialize();

@@ -6,7 +6,6 @@
 #include "initialization/sensor_initialization.h"
 
 
-bool midgoal = false;
 bool manual_cata_control = false;
 bool slow_cata = false;
 bool colorsort_on = true;
@@ -35,37 +34,26 @@ void cata_controller(){ // main intake/cata command loop
     pros::Task cata_task([]{
         while(1){
         // cata controls
+        if(!manual_cata_control){
         switch(cata_position){
             case LONGGOAL:
                 gate.extend();
-                if(prev_cata_position != LONGGOAL){
-                    cata.move_to(cata.get_long_goal_position());
-                }
-                prev_cata_position = LONGGOAL;
+                cata.move_to(cata.get_long_goal_position());
                 break;
             case MIDGOAL:
                 gate.extend();
-                if(prev_cata_position != MIDGOAL){
-                    cata.move_to(cata.get_midgoal_position());
-                }
-                prev_cata_position = MIDGOAL;
+                cata.move_to(cata.get_midgoal_position());
                 break;
             case DOWN:
                 gate.retract();
-                if(prev_cata_position != DOWN){
-                    cata.move_to(cata.get_down_position());
-                }
-                prev_cata_position = DOWN;
+                cata.move_to(cata.get_down_position());
                 break;
             case HALF:
-                gate.extend();
-                if(prev_cata_position != HALF){
-                    cata.move_to(cata.get_half_position());
-                }
-                prev_cata_position = HALF;
+                gate.retract();
+                cata.move_to(cata.get_half_position());
                 break;
         }
-
+        }   
         // delay to save resources
         pros::delay(20);
     }
@@ -78,11 +66,14 @@ void intake_controller(){
         // intake controls
         switch(intake_state){
             case INTAKE:
-                intake.move_velo(intake.volts);
-                // IS BREAKING THINGS
-                // if(colorsort_on){ 
-                //     intake.sort(intake.get_alliance_color());
-                // }
+                if(cata_position == DOWN){
+                    if(!intake.sorting){
+                        intake.move_velo(intake.volts);
+                    }
+                    if(colorsort_on){ 
+                        intake.sort(intake.get_alliance_color());
+                    }
+                }
                 break;
             case OUTTAKE:
                 intake.move_velo(intake.volts);
@@ -115,12 +106,21 @@ void driver_intake(){
 			intake.sort_on();
 		}
 	}
+    if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)){
+        if(intake.alliance_color == 1){
+            intake.set_alliance_blue();
+        } else{
+            intake.set_alliance_red();
+        }
+    }
 }
 
 void driver_cata(){
     if(manual_cata_control){ // if manual cata control is enabled switch to raw R1 -> up / R2 -> down
+        cata_position = HALF;
+        prev_cata_position = HALF;
         if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){ // R1 -> cata up
-            if(midgoal){ // if midgoal is enabled set max cata height to midgoal position
+            if(!cata.get_midgoal_status()){ // if midgoal is enabled set max cata height to midgoal position
                 if(cata_pot.get_value() > cata.get_midgoal_position()){ // check to see if cata has reached max height
                     if(slow_cata){ // if slow cata enabled lower cata speed
                         cata.move(90);
@@ -149,13 +149,22 @@ void driver_cata(){
 
 	} else{ // if manual cata control not enabled
         if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)){ // R1 -> cata up
-            if(midgoal){ // if midgoal enabled move cata to midgoal position
+            if(!cata.get_midgoal_status()){ // if midgoal enabled move cata to midgoal position
+                if(prev_cata_position != MIDGOAL){
                     cata.score_mid();
-                } else{ // if midgoal not enabled move cata to long goal position
+                }
+                prev_cata_position = MIDGOAL;
+            } else{ // if midgoal not enabled move cata to long goal position
+                if(prev_cata_position != LONGGOAL){
                     cata.score_long();
+                }
+                prev_cata_position = LONGGOAL;
             }
         } else if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)){ // R2 -> cata down
-			cata.down();
+			if(prev_cata_position != DOWN){
+                cata.down();
+            }
+            prev_cata_position = DOWN;
 		}
 	}
 
@@ -178,11 +187,7 @@ void driver_cata(){
 	}
 
     if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)){ // RIGHT -> toggle midgoal scoring on/off
-		if(midgoal){
-			midgoal = false;
-		} else{
-			midgoal = true;
-		}
+        cata.toggle_midgoal_mech();
 	}
 }
 

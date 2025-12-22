@@ -4,7 +4,6 @@
 #include "subsystems/scoring_system.h"
 
 IntakeState intake_state = STOP;
-IntakeState prev_intake_state = STOP;
 
 IntakeSubsystem::IntakeSubsystem(pros::Motor* intake, pros::Optical* sort_sensor, pros::adi::Potentiometer* alliance_pot)
     : intake(intake), sort_sensor(sort_sensor), alliance_pot(alliance_pot) {};
@@ -33,71 +32,41 @@ void IntakeSubsystem::brake(){
     intake->brake();
 }
 
-void IntakeSubsystem::store_current_intake_state(){
-    switch(intake_state){
-        case INTAKE:
-            prev_intake_state = INTAKE;
-            break;
-        case OUTTAKE:
-            prev_intake_state = OUTTAKE;
-            break;
-        case SORT:
-            prev_intake_state = SORT;
-            break;
-        case STOP:
-            prev_intake_state = STOP;
-            break;
-    }
-}
-
-void IntakeSubsystem::retrieve_previous_intake_state(){
-    switch(prev_intake_state){
-        case INTAKE:
-            intake_state = INTAKE;
-            break;
-        case OUTTAKE:
-            intake_state = OUTTAKE;
-            break;
-        case SORT:
-            intake_state = SORT;
-            break;
-        case STOP:
-            intake_state = STOP;
-            break;
-    }
-}
-
-
 void IntakeSubsystem::sort(int alliance_color){
     // wait until object detected
-    while(sort_sensor->get_proximity()<100){
-        pros::delay(10);
-    }
+    if(sort_sensor->get_proximity()<100){
     // optical sensors detect red better than blue, so we check for red detected and not
     // red detected instead of red detected and blue detected
     if(alliance_color == 1){
         // sort out blue
         // wait until color detected
-        if(!(sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){ // if not red detected
-            store_current_intake_state();
-            intake_state = SORT;
+        if((sort_sensor->get_hue() < 270) && (sort_sensor->get_hue() > 180)){ // if not red detected
+            std::cout<<"BLUE DETECTED"<<std::endl;
+            sorting = true;
+            prev_volts = volts;
+            move_velo(-127);
             // wait a bit
-            pros::delay(250);
+            pros::delay(500);
             // continue previous state
-            retrieve_previous_intake_state();
+            move_velo(prev_volts);
+            sorting = false;
         }
     } else if(alliance_color == 2){
         // sort out red
         // wait until color detected
         if((sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){ // if red detected
-            store_current_intake_state();
-            intake_state = SORT;
+            std::cout<<"RED DETECTED"<<std::endl;
+            sorting = true;
+            prev_volts = volts;
+            move_velo(-127);
             // wait a bit
-            pros::delay(250);
+            pros::delay(500);
             // continue previous state
-            retrieve_previous_intake_state();
+            move_velo(volts);
+            sorting = false;
         }
     }
+}
 }
 
 void IntakeSubsystem::get_alliance_pot_selection(){

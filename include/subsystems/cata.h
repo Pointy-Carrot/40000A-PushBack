@@ -13,13 +13,13 @@ class CataSubsystem {
         float long_goal_position;
         float midgoal_position;
         float half_position;
+        int num_times_called = 0;
     public:
 
         pros::Motor* cata;
         pros::adi::Potentiometer* cata_pot;
         PneumaticsSubsystem* gate;
         PneumaticsSubsystem* midgoal_switch;
-
 
         /**
          * @brief Cata Constructor
@@ -141,6 +141,18 @@ class CataSubsystem {
          * 
          */
         void midgoal_mech_down();
+
+        /**
+         * @brief toggle the midgoal mech
+         * 
+         */
+        void toggle_midgoal_mech();
+
+        /**
+         * @brief get the current position of the midgoal
+         * 
+         */
+        bool get_midgoal_status();
 
         /**
          * @brief Get the up position

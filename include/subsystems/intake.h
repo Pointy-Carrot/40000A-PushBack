@@ -12,8 +12,10 @@ class IntakeSubsystem {
         pros::Motor* intake;
         pros::Optical* sort_sensor;
         pros::adi::Potentiometer* alliance_pot;
-        int alliance_color;
+        int alliance_color = 2;
         int volts;
+        int prev_volts;
+        bool sorting = false;
 
         /**
          * @brief intake constructor
@@ -49,18 +51,6 @@ class IntakeSubsystem {
          * 
          */
         void brake();
-
-        /**
-         * @brief store the current intake state for later use
-         * 
-         */
-        void store_current_intake_state();
-
-        /**
-         * @brief retrieve the previous intake state
-         * 
-         */
-        void retrieve_previous_intake_state();
 
         /**
          * @brief sort a certain color of blocks depending on the alliance specified
@@ -114,4 +104,3 @@ class IntakeSubsystem {
 };
 
 extern IntakeState intake_state;
-extern IntakeState prev_intake_state;
