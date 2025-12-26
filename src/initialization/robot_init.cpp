@@ -4,6 +4,8 @@
 #include "initialization/pneumatics_initialization.h"
 #include "subsystems/pneumatics.h"
 
+bool driver_control = false;
+
 // explicit drive init
 DriveExplicit explicitchassis(&DL, &DR);
 
@@ -20,9 +22,9 @@ lemlib::Drivetrain drivetrain(&DL, // left drive motors
                               2 // horizontal drift
 );
 
-lemlib::ControllerSettings lateral_controller(6, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller(6,//16, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              22, // derivative gain (kD)
+                                              27,//220, // derivative gain (kD)
                                               0, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
@@ -31,14 +33,14 @@ lemlib::ControllerSettings lateral_controller(6, // proportional gain (kP)
                                               20// maximum acceleration (slew)
 );
 
-lemlib::ControllerSettings angular_controller(2.5, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              27, // derivative gain (kD)
+lemlib::ControllerSettings angular_controller(4, // proportional gain (kP)4
+                                              0, // integral gain (kI)0
+                                              44, // derivative gain (kD)44
                                               0, // anti windup
                                               1, // small error range, in degrees
-                                              1000, // small error range timeout, in milliseconds
+                                              100, // small error range timeout, in milliseconds100
                                               3, // large error range, in degrees
-                                              500, // large error range timeout, in milliseconds
+                                              500, // large error range timeout, in milliseconds500
                                               0// maximum acceleration (slew)
 );
 
@@ -60,15 +62,15 @@ IntakeSubsystem intake(&intake_motor, &colorsort_optical, &alliance_selector_pot
 // pneumatics init
 PneumaticsSubsystem wing(&wing_piston);
 PneumaticsSubsystem loader(&loader_piston);
-PneumaticsSubsystem gate(&gate_piston);
 PneumaticsSubsystem midgoal_switch(&midgoal_piston);
 PneumaticsSubsystem odom_lift(&odom_lift_piston);
+PneumaticsSubsystem gate(&gate_piston);
 
 // dist reset init
 DistanceReset dist_reset(&left_dist, 5.784, &right_dist, 5.784);
 
 // cata init
-CataSubsystem cata(&cata_motor, &cata_pot, &gate, &midgoal_switch); // after gate and midgoal switch
+CataSubsystem cata(&cata_motor, &cata_pot, &midgoal_switch); // after gate and midgoal switch
 
 // ramsete init
 //Ramsete ramchassis(&chassis, 10.724, lemlib::Omniwheel::NEW_275, 2.0, 0.7); // after chassis

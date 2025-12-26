@@ -8,6 +8,7 @@
 #include "misc/distance_reset.h"
 //#include "ramsete/ramsete.h"
 
+extern bool driver_control;
 
 // explicit drive init
 extern DriveExplicit explicitchassis;

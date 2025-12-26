@@ -11,3 +11,5 @@ void full_sawp();
 void prog_skills();
 
 void ramsete_test();
+
+void tuning_prog();

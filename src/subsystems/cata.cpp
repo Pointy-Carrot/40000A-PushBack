@@ -6,8 +6,8 @@
 CataState cata_position = HALF;
 CataState prev_cata_position = HALF;
 
-CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch) 
-    : cata(cata), cata_pot(cata_pot), gate(gate), midgoal_switch(midgoal_switch) {};
+CataSubsystem::CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* midgoal_switch) 
+    : cata(cata), cata_pot(cata_pot), midgoal_switch(midgoal_switch) {};
 
 void CataSubsystem::setDownPosition(float position){
     down_position = position;
@@ -29,20 +29,29 @@ void CataSubsystem::setHalfPosition(float position){
     // std::cout<<half_position<<std::endl;
 }
 
-void CataSubsystem::score_long(){
+void CataSubsystem::setLoadPosition(float position){
+    load_position = position;
+    // std::cout<<load_position<<std::endl;
+}
+
+void CataSubsystem::score_long(int volts){
     cata_position = LONGGOAL;
+    voltage = volts;
 }
 
-void CataSubsystem::score_mid(){
+void CataSubsystem::score_mid(int volts){
     cata_position = MIDGOAL;
+    voltage = volts;
 }
 
-void CataSubsystem::score_half(){
+void CataSubsystem::score_half(int volts){
     cata_position = HALF;
+    voltage = volts;
 }
 
-void CataSubsystem::down(){
+void CataSubsystem::down(int volts){
     cata_position = DOWN;
+    voltage = volts;
 }
 
 void CataSubsystem::move(int voltage){
@@ -66,26 +75,15 @@ bool CataSubsystem::is_halfway_up(){
 }
 
 void CataSubsystem::move_to(float position){
+    std::cout<<position<<std::endl;
     if(position < cata_pot->get_value()){
-        cata->move(127);
+        cata->move(abs(voltage));
+        // std::cout<<"UP"<<std::endl;
     } else if(position > cata_pot->get_value()){
-        cata->move(-127);
+        cata->move(-abs(voltage));
+        // std::cout<<"DOWN"<<std::endl;
     } else{
         cata->brake();
-    }
-
-    if(cata_position == LONGGOAL || cata_position == MIDGOAL || cata_position == HALF){
-        if(position < cata_pot->get_value()){
-            cata->move(127);
-        } else{
-            cata->brake();
-        }
-    } else{
-        if(position > cata_pot->get_value()){
-            cata->move(-127);
-        } else{
-            cata->brake();
-        }
     }
 }
 
@@ -119,4 +117,12 @@ float CataSubsystem::get_midgoal_position(){
 
 float CataSubsystem::get_half_position(){
     return half_position;
+}
+
+float CataSubsystem::get_load_position(){
+    return load_position;
+}
+
+float CataSubsystem::get_position(){
+    return cata_pot->get_value();
 }

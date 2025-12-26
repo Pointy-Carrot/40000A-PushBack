@@ -9,14 +9,16 @@ extern bool colorsort_on;
 /**
  * @brief automate the process of intaking while scoring long to prevent jamming
  * 
+ * @param time time in ms to wait for additional blocks to enter tube
  */
-void intake_while_scoring_long();
+void intake_while_scoring_long(int time);
 
 /**
  * @brief automate the process of intaking while scoring mid to prevent jamming
  * 
+ * @param time time in ms to wait for additional blocks to enter tube
  */
-void intake_while_scoring_mid();
+void intake_while_scoring_mid(int time);
 
 /**
  * @brief primary task for controlling cata
@@ -60,5 +62,16 @@ void driver_wing();
  */
 void driver_loader();
 
+/**
+ * @brief driver odom lift control
+ * 
+ */
+void driver_odom_lift();
+
+/**
+ * @brief score 7 low using cata to push blocks out of tube
+ * 
+ */
+void score_many_low();
 
 extern Color alliance_color;

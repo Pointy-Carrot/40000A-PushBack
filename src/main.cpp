@@ -10,19 +10,20 @@
 #include "subsystems/cata.h"
 #include "misc/autons.h"
 #include "initialization/sensor_initialization.h"
-#include "initialization/pneumatics_initialization.h"
 
 
 void initialize() {
 	pros::lcd::initialize();
 	chassis.calibrate();
 	colorsort_optical.set_led_pwm(100);
+	intake.get_alliance_pot_selection();
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	cata.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	cata.setDownPosition(3600); // TUNE
+	cata.setDownPosition(3700); // TUNE
 	cata.setHalfPosition(1800); // TUNE
-	cata.setLongGoalPosition(600); // TUNE
-	cata.setMidgoalPosition(400); // TUNE
+	cata.setLongGoalPosition(700); // TUNE
+	cata.setMidgoalPosition(500); // TUNE
+	cata.setLoadPosition(3600); // TUNE
 	cata_controller(); // cata control loop
 	intake_controller(); // intake control loop
 }
@@ -32,12 +33,13 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	full_sawp();
+	tuning_prog();
 }
 
 void opcontrol() {
+	driver_control = true;
 	cata.midgoal_mech_up(); // midgoal mech raises at driver start
-	cata.down();
+	cata.down(127);
 
 	while (true) {
 		int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -47,6 +49,7 @@ void opcontrol() {
 		driver_cata();
 		driver_wing();
 		driver_loader();
+		driver_odom_lift();
         // delay to save resources
         pros::delay(10);
 	}

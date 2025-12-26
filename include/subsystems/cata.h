@@ -8,18 +8,21 @@ enum CataState {LONGGOAL, MIDGOAL, DOWN, HALF};
 
 class CataSubsystem {
     private:
-        
+    
         float down_position;
         float long_goal_position;
         float midgoal_position;
         float half_position;
+        float load_position;
         int num_times_called = 0;
+
     public:
 
         pros::Motor* cata;
         pros::adi::Potentiometer* cata_pot;
-        PneumaticsSubsystem* gate;
         PneumaticsSubsystem* midgoal_switch;
+        int voltage;
+        bool past_down;
 
         /**
          * @brief Cata Constructor
@@ -29,7 +32,7 @@ class CataSubsystem {
          * @param gate gate piston
          * @param midgoal_switch midgoal switch piston
          */
-        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* gate, PneumaticsSubsystem* midgoal_switch);
+        CataSubsystem(pros::Motor* cata, pros::adi::Potentiometer* cata_pot, PneumaticsSubsystem* midgoal_switch);
 
         /**
          * @brief Set the Down Position of the cata
@@ -60,28 +63,41 @@ class CataSubsystem {
         void setHalfPosition(float position);
 
         /**
+         * @brief Set the Load Position of the cata
+         * 
+         * @param position load position
+         */
+        void setLoadPosition(float position);
+
+        /**
          * @brief score into the long tube
          * 
          */
-        void score_long();
+        void score_long(int volts);
 
         /**
          * @brief score into the mid tube
          * 
          */
-        void score_mid();
+        void score_mid(int volts);
 
         /**
          * @brief score 3 blocks in the tube
          * 
          */
-        void score_half();
+        void score_half(int volts);
+
+        /**
+         * @brief reset the cata to the down position
+         * 
+         */
+        void down(int volts);
 
         /**
          * @brief reset the cata to the loading position
          * 
          */
-        void down();
+        void load();
 
         /**
          * @brief spin the cata at a specified voltage
@@ -181,6 +197,20 @@ class CataSubsystem {
          * @return float 
          */
         float get_half_position();
+
+        /**
+         * @brief Get the load position
+         * 
+         * @return float 
+         */
+        float get_load_position();
+
+        /**
+         * @brief return the position of the cata
+         * 
+         * @return float 
+         */
+        float get_position();
 };
 
 extern CataState cata_position;

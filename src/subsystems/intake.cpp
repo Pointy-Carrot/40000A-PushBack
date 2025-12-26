@@ -46,7 +46,7 @@ void IntakeSubsystem::sort(int alliance_color){
             prev_volts = volts;
             move_velo(-127);
             // wait a bit
-            pros::delay(500);
+            pros::delay(625);
             // continue previous state
             move_velo(prev_volts);
             sorting = false;
@@ -60,7 +60,7 @@ void IntakeSubsystem::sort(int alliance_color){
             prev_volts = volts;
             move_velo(-127);
             // wait a bit
-            pros::delay(500);
+            pros::delay(625);
             // continue previous state
             move_velo(volts);
             sorting = false;
@@ -70,10 +70,10 @@ void IntakeSubsystem::sort(int alliance_color){
 }
 
 void IntakeSubsystem::get_alliance_pot_selection(){
-    if(alliance_pot->get_value()>2000){
+    if(alliance_pot->get_value()>900){
         alliance_color = 1; // RED
     } else{
-        alliance_color = 2; // BLUE
+        alliance_color = 2; // RED
     }
 }
 

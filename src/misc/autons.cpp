@@ -3,12 +3,27 @@
 #include "initialization/robot_init.h"
 #include "subsystems/scoring_system.h"
 
+void tuning_prog(){
+    chassis.setPose(0, 0, 0);
+    intake.get_alliance_pot_selection();
+    intake.sort_off();
+    cata.down(127);
+    wing.extend();
+    
+    // chassis.turnToHeading(90, 100000);
+    cata.score_long(127);
+    intake.move(127);
+    pros::delay(1500);
+    cata.down(-30);
+    intake.move(-127);
+}
+
 void left_sawp(){
     // initialization
     chassis.setPose(-47, 16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake top left pile
     chassis.moveToPoint(-22, 22, 1000);
@@ -25,9 +40,9 @@ void left_sawp(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_mid();
-    pros::delay(500);
-    cata.down();
+    cata.score_mid(60);
+    pros::delay(1000);
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-12, 12, chassis.getPose().theta);
     // intake bottom left pile
@@ -62,16 +77,16 @@ void left_sawp(){
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
     loader.retract();
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
 };
 void right_sawp(){
     // initialization
     chassis.setPose(-47, -16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake bottom left pile
     chassis.moveToPoint(-22, -22, 1000);
@@ -105,9 +120,9 @@ void right_sawp(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_mid();
-    pros::delay(500);
-    cata.down();
+    cata.score_mid(60);
+    pros::delay(1000);
+    cata.down(127);
     loader.retract();
     chassis.waitUntilDone();
     chassis.setPose(-12, 12, chassis.getPose().theta);
@@ -126,16 +141,16 @@ void right_sawp(){
     chassis.moveToPoint(0, -48, 1000, {.maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.maxSpeed = 15});
     loader.retract();
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
 };
 void left_7_ball_split(){
     // initialization
     chassis.setPose(-47, 16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake top left pile
     chassis.moveToPoint(-22, 22, 1000);
@@ -146,9 +161,9 @@ void left_7_ball_split(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_mid();
-    pros::delay(500);
-    cata.down();
+    cata.score_mid(60);
+    pros::delay(1000);
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-12, 12, chassis.getPose().theta);
     // clear top left loader
@@ -161,9 +176,9 @@ void left_7_ball_split(){
     // score top long goal
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-30, 48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
@@ -178,7 +193,7 @@ void right_7_ball_split(){
     chassis.setPose(-47, -16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake bottom left pile
     chassis.moveToPoint(-22, -22, 1000);
@@ -205,9 +220,9 @@ void right_7_ball_split(){
     // score bottom long goal
     chassis.moveToPoint(0, -48, 1000, {.maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-30, -48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::LEFT, Direction::LEFT);
@@ -222,7 +237,7 @@ void left_9_ball_split(){
     chassis.setPose(-47, 16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake top left pile
     chassis.moveToPoint(-22, 22, 1000);
@@ -239,9 +254,9 @@ void left_9_ball_split(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_mid();
-    pros::delay(500);
-    cata.down();
+    cata.score_mid(60);
+    pros::delay(1000);
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-12, 12, chassis.getPose().theta);
     // clear top left loader
@@ -256,16 +271,16 @@ void left_9_ball_split(){
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
     loader.retract();
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
 };
 void right_9_ball_split(){
     // initialization
     chassis.setPose(-47, -16, 90);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake bottom left pile
     chassis.moveToPoint(-22, -22, 1000);
@@ -299,16 +314,16 @@ void right_9_ball_split(){
     chassis.moveToPoint(0, -48, 1000, {.maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.maxSpeed = 15});
     loader.retract();
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
 };
 void full_sawp(){
     // initialization
     chassis.setPose(-48, -17, 180);
     intake.get_alliance_pot_selection();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // clear bottom left loader
     chassis.moveToPoint(-48, -48, 1000);
@@ -321,9 +336,9 @@ void full_sawp(){
     // score bottom long goal
     chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-30, -48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::LEFT, Direction::LEFT);
@@ -342,9 +357,9 @@ void full_sawp(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_mid();
-    pros::delay(500);
-    cata.down();
+    cata.score_mid(60);
+    pros::delay(1000);
+    cata.down(127);
     chassis.waitUntilDone();
     chassis.setPose(-12, 12, chassis.getPose().theta);
     // clear top left loader
@@ -356,16 +371,16 @@ void full_sawp(){
     // score top long goal
     chassis.moveToPoint(0, 48, 1000, {.maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
 };
 void prog_skills(){
     // initialization
     chassis.setPose(-46, -9, 180);
     intake.set_alliance_red();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     wing.extend();
     // intake bottom left pile
     chassis.moveToPoint(-46, -24, 1000);
@@ -419,13 +434,13 @@ void prog_skills(){
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 20});
     pros::delay(250);
-    intake_while_scoring_mid();
+    intake_while_scoring_mid(1000);
     pros::delay(250);
-    cata.down();
+    cata.down(127);
     pros::delay(250);
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(13, 13, chassis.getPose().theta);
     // intake bottom mid pile
     intake.sort_off();
@@ -459,13 +474,13 @@ void prog_skills(){
     // score bottom right long goal first time
     chassis.moveToPoint(0, -48, 500, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.forwards = false, .maxSpeed = 15});
-    intake_while_scoring_long();
+    intake_while_scoring_long(1000);
     pros::delay(250);
-    cata.down();
+    cata.down(127);
     pros::delay(250);
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(30, -48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
     // clear bottom right loader
@@ -477,9 +492,9 @@ void prog_skills(){
     // score bottom right long goal second time
     chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, -48, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(30, -48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::RIGHT, Direction::RIGHT);
     // intake top mid pile
@@ -517,13 +532,13 @@ void prog_skills(){
     // score top left long goal first time
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
-    intake_while_scoring_long();
+    intake_while_scoring_long(1000);
     pros::delay(250);
-    cata.down();
+    cata.down(127);
     pros::delay(250);
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(-30, 48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
     // clear top left loader
@@ -534,9 +549,9 @@ void prog_skills(){
     // score top left long goal second time
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(-30, 48, chassis.getPose().theta);
     dist_reset.update_position(Sensor::RIGHT, Direction::LEFT);
     // clear red park zone and park
@@ -556,7 +571,7 @@ void faster_prog_skills(){
     chassis.setPose(-62, -17, 0);
     intake.set_alliance_blue();
     intake.sort_on();
-    cata.down();
+    cata.down(127);
     // clear red park zone
     chassis.moveToPoint(-62, 37, 2500);
     intake.move(127);
@@ -573,14 +588,14 @@ void faster_prog_skills(){
     chassis.moveToPoint(0, 0, 1000, {.forwards = false, .maxSpeed = 60});
     cata.midgoal_mech_down();
     chassis.moveToPoint(0, 0, 500, {.forwards = false, .maxSpeed = 15});
-    intake_while_scoring_mid();
+    intake_while_scoring_mid(1000);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     pros::delay(250);
     intake.sort_off();
-    intake_while_scoring_mid();
+    intake_while_scoring_mid(1000);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(-12, 12, chassis.getPose().theta);
     // clear top left loader
     chassis.moveToPoint(-48, 48, 1000);
@@ -599,13 +614,13 @@ void faster_prog_skills(){
     dist_reset.update_position(Sensor::LEFT, Direction::RIGHT);
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 60});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
-    intake_while_scoring_long();
+    intake_while_scoring_long(1000);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     pros::delay(500);
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(30, 48, chassis.getPose().theta);
     // clear top right loader
     chassis.moveToPoint(90, 48, 1500, {.maxSpeed = 60});
@@ -613,9 +628,9 @@ void faster_prog_skills(){
     // score top right long goal
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 60});
     chassis.moveToPoint(0, 48, 500, {.forwards = false, .maxSpeed = 15});
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(30, 48, chassis.getPose().theta);
     // clear blue park zone
     chassis.moveToPoint(60, 24, 1000);
@@ -668,13 +683,13 @@ void faster_prog_skills(){
     dist_reset.update_position(Sensor::LEFT, Direction::LEFT);
     chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 60});
     chassis.moveToPoint(0, -48, 500, {.forwards = false, .maxSpeed = 15});
-    intake_while_scoring_long();
+    intake_while_scoring_long(1000);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     pros::delay(500);
-    cata.score_long();
+    cata.score_long(127);
     pros::delay(500);
-    cata.down();
+    cata.down(127);
     chassis.setPose(-30, -48, chassis.getPose().theta);
 }
 
