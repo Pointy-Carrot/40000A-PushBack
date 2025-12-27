@@ -10,12 +10,9 @@ void tuning_prog(){
     cata.down(127);
     wing.extend();
     
-    // chassis.turnToHeading(90, 100000);
-    cata.score_long(127);
-    intake.move(127);
-    pros::delay(1500);
-    cata.down(-30);
-    intake.move(-127);
+
+    pros::delay(5000);
+    dist_reset.update_position(Sensor::LEFT, Direction::DOWN);
 }
 
 void left_sawp(){
@@ -81,6 +78,7 @@ void left_sawp(){
     pros::delay(500);
     cata.down(127);
 };
+
 void right_sawp(){
     // initialization
     chassis.setPose(-47, -16, 90);
@@ -145,6 +143,7 @@ void right_sawp(){
     pros::delay(500);
     cata.down(127);
 };
+
 void left_7_ball_split(){
     // initialization
     chassis.setPose(-47, 16, 90);
@@ -188,6 +187,7 @@ void left_7_ball_split(){
     wing.retract();
     chassis.moveToPoint(-10, 37, 1000, {.forwards = false});
 };
+
 void right_7_ball_split(){
     // initialization
     chassis.setPose(-47, -16, 90);
@@ -232,6 +232,7 @@ void right_7_ball_split(){
     wing.retract();
     chassis.moveToPoint(-10, -37, 1000);
 };
+
 void left_9_ball_split(){
     // initialization
     chassis.setPose(-47, 16, 90);
@@ -275,6 +276,7 @@ void left_9_ball_split(){
     pros::delay(500);
     cata.down(127);
 };
+
 void right_9_ball_split(){
     // initialization
     chassis.setPose(-47, -16, 90);
@@ -318,6 +320,7 @@ void right_9_ball_split(){
     pros::delay(500);
     cata.down(127);
 };
+
 void full_sawp(){
     // initialization
     chassis.setPose(-48, -17, 180);
@@ -375,6 +378,7 @@ void full_sawp(){
     pros::delay(500);
     cata.down(127);
 };
+
 void prog_skills(){
     // initialization
     chassis.setPose(-46, -9, 180);

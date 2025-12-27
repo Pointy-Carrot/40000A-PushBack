@@ -9,6 +9,7 @@
 bool manual_cata_control = false;
 bool slow_cata = false;
 bool colorsort_on = true;
+bool no_gate = false;
 
 void intake_while_scoring_long(int time){
     intake.move(-80);
@@ -39,9 +40,12 @@ void cata_controller(){ // main intake/cata command loop
         // cata controls
         if(!manual_cata_control){
         switch(cata_position){
+
             case LONGGOAL:
                 cata.past_down = false;
-                gate.extend();
+                if(!no_gate){
+                    gate.extend();
+                }
                 cata.move_to(cata.get_long_goal_position());
                 if(cata.get_position() <= cata.get_long_goal_position() && driver_control){
                     cata.down(127);
@@ -52,7 +56,7 @@ void cata_controller(){ // main intake/cata command loop
                 cata.past_down = false;
                 gate.retract();
                 cata.move_to(cata.get_midgoal_position());
-                if(cata.get_position() <= cata.get_midgoal_position()){
+                if(cata.get_position() <= cata.get_midgoal_position() && driver_control){
                     cata.down(127);
                     prev_cata_position = DOWN;
                 }
@@ -253,4 +257,10 @@ void score_many_low(){
     pros::delay(1500);
     cata.down(127);
     intake.brake();
+    no_gate = false;
+}
+
+void cata_up_for_low(){
+    no_gate = true;
+    cata.score_long(127);
 }

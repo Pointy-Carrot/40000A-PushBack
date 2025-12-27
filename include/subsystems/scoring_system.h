@@ -74,4 +74,10 @@ void driver_odom_lift();
  */
 void score_many_low();
 
+/**
+ * @brief put the cata up for scoring 7 in low goal
+ * 
+ */
+void cata_up_for_low();
+
 extern Color alliance_color;

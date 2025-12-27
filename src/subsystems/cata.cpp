@@ -75,7 +75,7 @@ bool CataSubsystem::is_halfway_up(){
 }
 
 void CataSubsystem::move_to(float position){
-    std::cout<<position<<std::endl;
+    if(cata_position == DOWN){
     if(position < cata_pot->get_value()){
         cata->move(abs(voltage));
         // std::cout<<"UP"<<std::endl;
@@ -84,6 +84,13 @@ void CataSubsystem::move_to(float position){
         // std::cout<<"DOWN"<<std::endl;
     } else{
         cata->brake();
+    }
+    } else{
+        if(position < cata_pot->get_value()){
+            cata->move(abs(voltage));
+        } else{
+            cata->brake();
+        }
     }
 }
 

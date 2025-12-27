@@ -23,9 +23,18 @@ void initialize() {
 	cata.setHalfPosition(1800); // TUNE
 	cata.setLongGoalPosition(700); // TUNE
 	cata.setMidgoalPosition(500); // TUNE
-	cata.setLoadPosition(3600); // TUNE
+	cata.setLoadPosition(3650); // TUNE
 	cata_controller(); // cata control loop
 	intake_controller(); // intake control loop
+
+	pros::Task screenTask([]() {
+        while (true) {
+            // print robot location to the brain screen
+            std::cout<<chassis.getPose().x<<std::endl;
+
+            pros::delay(50);
+        }
+    });
 }
 
 void disabled() {}

@@ -41,7 +41,6 @@ void IntakeSubsystem::sort(int alliance_color){
         // sort out blue
         // wait until color detected
         if((sort_sensor->get_hue() < 270) && (sort_sensor->get_hue() > 180)){ // if not red detected
-            std::cout<<"BLUE DETECTED"<<std::endl;
             sorting = true;
             prev_volts = volts;
             move_velo(-127);
@@ -55,7 +54,6 @@ void IntakeSubsystem::sort(int alliance_color){
         // sort out red
         // wait until color detected
         if((sort_sensor->get_hue()>300) || (sort_sensor->get_hue()<60)){ // if red detected
-            std::cout<<"RED DETECTED"<<std::endl;
             sorting = true;
             prev_volts = volts;
             move_velo(-127);
