@@ -11,34 +11,94 @@ double DistanceReset::mm_to_in(double mm){
 }
 
 void DistanceReset::update_position(Sensor sensor_selection, Direction direction){
+    float sample1;
+    float sample2;
+    float sample3;
+    float avg;
     if(sensor_selection == Sensor::LEFT){
         switch(direction){
             case Direction::UP:
-                chassis.setPose(-70 + mm_to_in(left_sensor->get_distance()) + left_offset, chassis.getPose().y, chassis.getPose().theta);
+                sample1 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+                pros::delay(10);
+                sample2 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+                pros::delay(10);
+                sample3 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(avg, chassis.getPose().y, chassis.getPose().theta);
                 break;
             case Direction::DOWN:
-                chassis.setPose(70 - mm_to_in(left_sensor->get_distance()) - left_offset, chassis.getPose().y, chassis.getPose().theta);
+                sample1 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+                pros::delay(10);
+                sample2 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+                pros::delay(10);
+                sample3 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(avg, chassis.getPose().y, chassis.getPose().theta);
                 break;
             case Direction::LEFT:
-                chassis.setPose(chassis.getPose().x, -70 + mm_to_in(left_sensor->get_distance()) + left_offset, chassis.getPose().theta);
+                sample1 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+                pros::delay(10);
+                sample2 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+                pros::delay(10);
+                sample3 = 78 - mm_to_in(left_sensor->get_distance()) - left_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(chassis.getPose().x, avg, chassis.getPose().theta);
                 break;
             case Direction::RIGHT:
-                chassis.setPose(chassis.getPose().x, 70 - mm_to_in(left_sensor->get_distance()) - left_offset, chassis.getPose().theta);
+                sample1 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+                pros::delay(10);
+                sample2 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+                pros::delay(10);
+                sample3 = -78 + mm_to_in(left_sensor->get_distance()) + left_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(chassis.getPose().x, avg, chassis.getPose().theta);
                 break;
         }
     } else{
         switch(direction){
             case Direction::UP:
-                chassis.setPose(70 - mm_to_in(right_sensor->get_distance()), chassis.getPose().y, chassis.getPose().theta);
+                sample1 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+                pros::delay(10);
+                sample2 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+                pros::delay(10);
+                sample3 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(avg, chassis.getPose().y, chassis.getPose().theta);
                 break;
             case Direction::DOWN:
-                chassis.setPose(-70 + mm_to_in(right_sensor->get_distance()) + right_offset, chassis.getPose().y, chassis.getPose().theta);
+                sample1 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+                pros::delay(10);
+                sample2 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+                pros::delay(10);
+                sample3 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(avg, chassis.getPose().y, chassis.getPose().theta);
                 break;
             case Direction::LEFT:
-                chassis.setPose(chassis.getPose().x, 70 - mm_to_in(right_sensor->get_distance()) - right_offset, chassis.getPose().theta);
+                sample1 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+                pros::delay(10);
+                sample2 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+                pros::delay(10);
+                sample3 = 58 - mm_to_in(right_sensor->get_distance()) - right_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(chassis.getPose().x, avg, chassis.getPose().theta);
                 break;
             case Direction::RIGHT:
-                chassis.setPose(chassis.getPose().x, -70 + mm_to_in(right_sensor->get_distance()) + right_offset, chassis.getPose().theta);
+                sample1 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+                pros::delay(10);
+                sample2 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+                pros::delay(10);
+                sample3 = -58 + mm_to_in(right_sensor->get_distance()) + right_offset;
+
+                avg = (sample1+sample2+sample3)/3;
+                chassis.setPose(chassis.getPose().x, avg, chassis.getPose().theta);
                 break;
         }
     }

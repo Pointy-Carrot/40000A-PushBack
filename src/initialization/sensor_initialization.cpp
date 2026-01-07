@@ -13,7 +13,7 @@ pros::Optical colorsort_optical(20);
 pros::adi::Potentiometer cata_pot('E');
 pros::adi::Potentiometer alliance_selector_pot('D');
 
-pros::Rotation horiz_tracker(-17);
+pros::Rotation horiz_tracker(17);
 pros::Rotation vert_tracker(19);
 
 pros::Imu imu(4);

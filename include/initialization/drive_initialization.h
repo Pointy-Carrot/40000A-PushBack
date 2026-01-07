@@ -22,10 +22,10 @@ class DriveExplicit {
         DriveExplicit(pros::MotorGroup* DL, pros::MotorGroup* DR);
 
         /**
-         * @brief each side of the drivetrain at a specified rpm
+         * @brief each side of the drivetrain at a specified voltage
          * 
-         * @param DL_rpm rpm for the left drive motors
-         * @param DR_rpm rpm for the right drive motors
+         * @param DL_volt voltage for the left drive motors
+         * @param DR_volt voltage for the right drive motors
          */
-        void move_drive(double DL_rpm, double DR_rpm);
+        void move_drive(double DL_volt, double DR_volt);
 };

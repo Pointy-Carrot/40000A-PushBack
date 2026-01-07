@@ -10,7 +10,7 @@ DriveExplicit::DriveExplicit(pros::MotorGroup* DL, pros::MotorGroup* DR)
     : DL(DL), DR(DR) {};
 
 
-void DriveExplicit::move_drive(double DL_rpm, double DR_rpm){
-    DL->move(DL_rpm);
-    DR->move(DR_rpm);
+void DriveExplicit::move_drive(double DL_volt, double DR_volt){
+    DL->move(DL_volt);
+    DR->move(DR_volt);
 }

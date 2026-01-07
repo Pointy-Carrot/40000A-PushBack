@@ -17,8 +17,8 @@ lemlib::TrackingWheel horizontal_tracking_wheel(&horiz_tracker, lemlib::Omniwhee
 lemlib::Drivetrain drivetrain(&DL, // left drive motors
                               &DR, // right drive motors
                               10.724, // track width
-                              lemlib::Omniwheel::NEW_275, // wheel size
-                              600, // rpm
+                              lemlib::Omniwheel::OLD_325, // wheel size
+                              450, // rpm
                               2 // horizontal drift
 );
 

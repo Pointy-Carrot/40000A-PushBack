@@ -47,10 +47,10 @@ void cata_controller(){ // main intake/cata command loop
                     gate.extend();
                 }
                 cata.move_to(cata.get_long_goal_position());
-                if(cata.get_position() <= cata.get_long_goal_position() && driver_control){
-                    cata.down(127);
-                    prev_cata_position = DOWN;
-                }
+                // if(cata.get_position() <= cata.get_long_goal_position() && driver_control){
+                //     cata.down(127);
+                //     prev_cata_position = DOWN;
+                // }
                 break;
             case MIDGOAL:
                 cata.past_down = false;
