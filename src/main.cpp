@@ -42,7 +42,7 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	left_sawp();
+	prog_skills();
 }
 
 void opcontrol() {

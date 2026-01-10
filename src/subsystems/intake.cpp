@@ -45,7 +45,7 @@ void IntakeSubsystem::sort(int alliance_color){
             prev_volts = volts;
             move_velo(-127);
             // wait a bit
-            pros::delay(625);
+            pros::delay(425);
             // continue previous state
             move_velo(prev_volts);
             sorting = false;
@@ -58,7 +58,7 @@ void IntakeSubsystem::sort(int alliance_color){
             prev_volts = volts;
             move_velo(-127);
             // wait a bit
-            pros::delay(625);
+            pros::delay(425);
             // continue previous state
             move_velo(volts);
             sorting = false;

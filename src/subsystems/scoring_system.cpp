@@ -47,10 +47,11 @@ void cata_controller(){ // main intake/cata command loop
                     gate.extend();
                 }
                 cata.move_to(cata.get_long_goal_position());
-                // if(cata.get_position() <= cata.get_long_goal_position() && driver_control){
-                //     cata.down(127);
-                //     prev_cata_position = DOWN;
-                // }
+                if(cata.get_position() <= cata.get_long_goal_position() && driver_control){
+                    pros::delay(250);
+                    cata.down(127);
+                    prev_cata_position = DOWN;
+                }
                 break;
             case MIDGOAL:
                 cata.past_down = false;
@@ -193,12 +194,12 @@ void driver_cata(){
         if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)){ // R1 -> cata up
             if(!cata.get_midgoal_status()){ // if midgoal enabled move cata to midgoal position
                 if(prev_cata_position != MIDGOAL){
-                    cata.score_mid(127);
+                    cata.score_mid(60);
                 }
                 prev_cata_position = MIDGOAL;
             } else{ // if midgoal not enabled move cata to long goal position
                 if(prev_cata_position != LONGGOAL){
-                    cata.score_long(127);
+                    cata.score_long(80);
                 }
                 prev_cata_position = LONGGOAL;
             }
